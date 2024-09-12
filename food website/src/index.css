@@ -1,0 +1,86 @@
+.navbar{
+    background-color: rgba(242, 242, 12, 0.8);
+}
+.name{
+    color: red;
+    font-weight: 900;
+    margin-left: 20px;
+    font-style: oblique;
+}
+.nav-link{
+    color:black;
+    font-weight: 600;
+}
+.footer{
+    background-color:rgba(242, 242, 12, 0.8);
+}
+.footerhead{
+    color:white
+}
+.footerlist{
+    color:black;
+}
+body{
+    background-color: white;
+}
+.headerdiv{
+    text-align: center;
+}
+.welcome{
+    color:red;
+    margin-top: 30px;
+    font-weight: bolder;
+}
+.homeimage{
+    height:350px;
+
+}
+h1 {
+    font-size: 3rem;
+    opacity: 0;
+    transform: translateX(-100%);
+    animation: slide-in 1s forwards ease-out;
+  }
+
+  @keyframes slide-in {
+    0% {
+      transform: translateX(-100%);
+      opacity: 0;
+    }
+    100% {
+      transform: translateX(0);
+      opacity: 1;
+    }
+  }
+  .btn {
+    background: linear-gradient(145deg, #ff4e50, #d41f1f);
+    border: none;
+    border-radius: 30px;
+    padding: 15px 30px;
+    font-size: 18px;
+    font-weight: bold;
+    color: white;
+    cursor: pointer;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+  }
+
+  .btn:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+  }
+
+  .btn:active {
+    transform: translateY(0);
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+  }
+  .navbar-nav .nav-link {
+    padding: 10px;
+  }
+  
+  .navbar-nav {
+    text-align: right;
+  }
+  .nav-link :hover{
+    background-color: grey;
+  }
