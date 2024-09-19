@@ -82,5 +82,62 @@ h1 {
     text-align: right;
   }
   .nav-link :hover{
-    background-color: grey;
+    background-color:red;
   }
+  /* Button Styles */
+
+/* Button Styles */
+/* Button Styles */
+
+
+.image-container {
+  position: relative;
+}
+
+.image-container talabatpic1 {
+ position:absolute;
+ top:0;
+ right:0;
+ margin-bottom: 50px;
+ height:600px; /* Adjust as needed */
+  /* Optional: Add any other styling you need */
+}
+.talabatpic2{
+  position: absolute;
+  right:0;
+}
+.meal-mate {
+  font-size: 2em; /* Larger font size for "Meal Mate" */
+  color: red; /* Different color for "Meal Mate" */
+  font-weight: bold; /* Make "Meal Mate" bold */
+  font-style: italic; /* Optional: Make "Meal Mate" italic */
+}
+.beautiful-text {
+  font-size: 1.5em; /* Adjust the font size */
+  color: #555; /* Set the text color */
+  font-family: 'Arial', sans-serif; /* Choose a clean font */
+  text-align: center; /* Center the text */
+  margin: 20px 0; /* Add space above and below the paragraph */
+  padding: 10px; /* Add padding around the text */
+  background-color: #f9f9f9; /* Light background color */
+  border-radius: 8px; /* Rounded corners for the background */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  line-height: 1.6; /* Adjust line height for better readability */
+}
+.styled-image {
+  border-radius: 50%; /* Make the image round */
+  border: 5px solid #ffab73; /* Light orange border color */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Optional: Add shadow for depth */
+  width: 220px; /* Set a specific width */
+  height: 220px; /* Set a specific height */
+  object-fit: cover; /* Ensure the image covers the container */
+}
+
+.backgroundimg {
+  background-image: url("https://d3gy1em549lxx2.cloudfront.net/9dc05674-6092-497f-b78b-8c4ff27232b0.jpg");
+  background-size: cover; /* Ensures the image covers the entire container */
+  background-position: center; /* Centers the image */
+  background-repeat: no-repeat; /* Prevents the image from repeating */
+  width: 100%; /* Ensures the element takes full width of the container */
+  height: 100vh; /* Sets the height to cover the full viewport */
+}

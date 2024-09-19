@@ -19,7 +19,7 @@ function Footer() {
             <li><a href="#">About Us</a></li>
             <li><a href="#">Contact</a></li>
             <li><a href="#">Terms & Conditions</a></li>
-<button>sign up as admin</button>
+
           </ul>
         </div>
       

@@ -54,7 +54,7 @@ function Signup() {
                   type="email" 
                   {...register('email')} 
                   placeholder="Email" 
-                  className="input input-bordered" 
+                  className="input input-bordered" autoComplete='off'
                   required 
                 />
               </div>
@@ -65,8 +65,9 @@ function Signup() {
                 <input 
                   type="password" 
                   {...register('password')} 
-                  placeholder="Password" 
+                  placeholder="Password" autoComplete='off' 
                   className="input input-bordered" 
+
                   required 
                 />
               </div>

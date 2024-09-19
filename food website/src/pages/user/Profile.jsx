@@ -1,60 +1,58 @@
-import React, { useEffect, useState } from 'react';
-import { axiosinstance } from '../../config/axiosinstance';
-import { useNavigate } from 'react-router-dom';
+import React, { useEffect, useState } from "react";
+import { axiosinstance } from "../../config/axiosinstance";
+import { useNavigate, useParams } from "react-router-dom";
+import { clearUser } from "../../redux/features/userSlice";
+import { useDispatch } from "react-redux";
 
-function Profile() {
-  const [user, setUser] = useState({});
-  const [loading, setLoading] = useState(true);
-  const [loggedOut, setLoggedOut] = useState(false); // State to track logout
-  const navigate = useNavigate();
+const ProfilePage = () => {
+    const [user, setUser] = useState({});
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
 
-  const fetchuserprofile = async () => {
-    try {
-      const response = await axiosinstance({
-        method: "GET",
-        url: "/user/profile",
-      });
-      setUser(response.data); 
-      setLoading(false); 
-    } catch (error) {
-      console.error(error);
-      setLoading(false); 
+    // Get the id from the URL using useParams
+    const { id } = useParams();
+
+    // Log the userId to check if it's correctly retrieved
+    console.log("User ID from URL:", id); 
+
+    const fetchUserProfile = async () => {
+        try {
+            const response = await axiosinstance.get(`/user/profile/${user.id}`); // Correct URL
+            console.log("API Response:", response); // Log the API response for inspection
+            setUser(response?.data?.data); // Adjust based on response structure
+        } catch (error) {
+            console.error("Error fetching profile:", error);
+        }
+    };
+
+    const handleLogout = async () => {
+        try {
+            await axiosinstance.post("/user/logout");
+            dispatch(clearUser());
+            navigate('/');
+        } catch (error) {
+            console.error("Error logging out:", error);
+        }
+    };
+
+    useEffect(() => {
+        fetchUserProfile();
+    }, [id]);
+
+    if (!user.name) {
+        return <div>Loading...</div>;
     }
-  };
 
-  const handlelogout = async () => {
-    try {
-      await axiosinstance({
-        method: "POST",
-        url: "/user/logout",
-      });
-      setLoggedOut(true); // Trigger the logout state
-    } catch (error) {
-      console.error(error);
-    }
-  };
+    return (
+        <div>
+            <h1>{user?.name}</h1>
+            <h1>{user?.email}</h1>
+            <img src={user?.profilepic} alt="User profile" /> {/* Corrected profile pic key */}
+            <button className="btn btn-outline">Edit</button>
+            <br />
+            <button onClick={handleLogout} className="btn btn-secondary">Log-out</button>
+        </div>
+    );
+};
 
-  useEffect(() => {
-    fetchuserprofile();
-  }, []);
-
-  useEffect(() => {
-    if (loggedOut) {
-      navigate('/'); // Perform navigation after logout
-    }
-  }, [loggedOut, navigate]); // Dependency array listens for logout
-
-  if (loading) return <p>Loading...</p>;
-
-  return (
-    <div>
-      <h1>{user?.name}</h1>
-      <h1>{user?.email}</h1>
-      <button>Edit Profile</button><br />
-      <button className='btn btn-secondary'>Edit user</button>
-      <button className='btn btn-secondary' onClick={handlelogout}>Logout</button>
-    </div>
-  );
-}
-
-export default Profile;
+export default ProfilePage;

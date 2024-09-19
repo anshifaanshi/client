@@ -1,85 +1,85 @@
-import { createBrowserRouter } from "react-router-dom";
-import Home from "../pages/Home";
-import Rootlayout from "../layout/Rootlayout";
-import Aboutus from "../pages/Aboutus";
-import Login from "../pages/Login";
-import { Hotel } from "../pages/Hotels";
-import { UserLayout } from "../layout/Userlayout";
-import Userprofile from "../pages/Userprofile";
-import Authuser from "./protectedroutes/Authuser";
-import Adminlayout from "../layout/Adminlayout";
-import Authadmin from "./protectedroutes/Authadmin";
-import AdminProfile from "../pages/admin/AdminProfile";
-import Hoteldetails from "../pages/Hoteldetails";
-import Cartpage from "../pages/user/Cartpage";
-import Signup from "../pages/Signup";
-import Fooditems from "../pages/Fooditems";
+import Aboutus from '../pages/Aboutus';
+import { createBrowserRouter } from 'react-router-dom';
+import Rootlayout from '../layout/Rootlayout';
+import Home from '../pages/Home';
+import { LoginPage } from '../pages/Login';
+import Signup from '../pages/Signup';
+import { Hotel } from '../pages/Hotels';
+import Hoteldetails from '../pages/Hoteldetails';
+import Fooditems from '../pages/Fooditems';
+import AdminLogin from '../pages/admin/AdminLogin';
+import Authuser from '../routes/protectedroutes/Authuser';
+import Profile from '../pages/user/Profile';
+import { CartPage } from '../pages/user/Cartpage';
+import { ProfilePage } from '../pages/Userprofile';
+import { Adminlayout } from '../layout/Adminlayout';
+import AdminProfile from '../pages/admin/AdminProfile';
+import { UserLayout } from '../layout/Userlayout';
 
 export const router = createBrowserRouter([
   {
     path: "/",
-    element: <Rootlayout />,
+    element: <UserLayout />,
     children: [
       {
-        path: '/',
+        path: "/",
         element: <Home />,
       },
       {
-        path: 'about',
+        path: "about",
         element: <Aboutus />,
       },
       {
-        path: 'login',
-        element: <Login />,
+        path: "login",
+        element: <LoginPage />,
       },
       {
-        path: 'signup',
+        path: "signup",
         element: <Signup />,
       },
       {
-        path: '/hotel/hotels',
+        path: "hotel/hotels",
         element: <Hotel />,
       },
       {
-        path: '/hotel/hotelprofile/:id',
+        path: "hotel/hotelprofile/:id",
         element: <Hoteldetails />,
       },
       {
-        path: '/fooditems',
+        path: "fooditems/allfood",
         element: <Fooditems />,
       },
-    ],
-  },
+      {
+        path: "Cart/getcart",
+        element: <CartPage />,
+      },
+     
+  ,
   {
-    path: '/user',
+    path: "user",
     element: <Authuser />, // Protect user routes
     children: [
       {
-        path: 'profile',
-        element: <Userprofile />, // Add your user profile page here
+        path: "profile",
+        element: <profilePage />, // Display the user's profile
       },
-      {
-        path: 'cart',
-        element: <Cartpage />, // Add cart page
-      },
+    ],
+  }
+      
     ],
   },
   {
-    path: '/admin',
-    element: (
-      <UserLayout>
-        <Adminlayout />
-      </UserLayout>
-    ),
+    path: "admin",
+    element: <Adminlayout />,
     children: [
       {
-        path: 'profile',
-        element: <AdminProfile />, // Admin profile page
-      },{
-        path:"signup",
-        element:
-      }
-      // Add other admin routes here if needed
+        path: "login",
+        element: <AdminLogin role="admin" />,
+      },
+      {
+        path: "profile",
+        element: <AdminProfile />,
+      },
     ],
   },
 ]);

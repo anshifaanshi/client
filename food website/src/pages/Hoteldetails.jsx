@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams, useNavigate } from "react-router-dom"; // Import useNavigate
+import { useParams, useNavigate } from "react-router-dom"; // Import useNavigate and useParams
 import { axiosinstance } from "../config/axiosinstance"; // Import axiosinstance
 import { toast } from 'react-toastify'; // Assuming you're using react-toastify for notifications
 
@@ -11,9 +11,12 @@ const Hoteldetails = () => {
 
     const fetchHotelsdetails = async () => {
         try {
-            const response = await axiosinstance.get(`hotel/hotelprofile/${id}`); // Use dynamic ID
+            if (!id) {
+                throw new Error("Hotel ID is missing");
+            }
+            const response = await axiosinstance.get(`/hotel/hotelprofile/${id}`);
             setData(response?.data?.data || {});
-            console.log('Hotel details fetched:', response);
+            console.log('Hotel details fetchedet:', response);
         } catch (error) {
             console.error("Error fetching hotel details:", error);
             toast.error("Failed to retrieve hotel details.");
@@ -21,6 +24,7 @@ const Hoteldetails = () => {
             setLoading(false);
         }
     };
+    
 
     const addToCart = async () => {
         try {
@@ -60,13 +64,13 @@ const Hoteldetails = () => {
                     <h1>{data?.duration}</h1>
 
                     {/* Navigate to another profile page */}
-                    <button onClick={() => navigate('/fooditems/allfoods')} className="btn btn-primary">
-                        menu
+                    <button onClick={() => navigate('/fooditems/allfood')} className="btn btn-primary">
+                        Menu
                     </button>
                 </div>
                 <div className="w-5/12">
-                <p>{data?.email}</p>
-                <p>{data?.isActive}</p>
+                    <p>{data?.email}</p>
+                    <p>{data?.isActive ? 'Active' : 'Inactive'}</p>
                     <img src={data?.image} alt="Hotel" />
                 </div>
             </div>

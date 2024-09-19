@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { SideBar } from './SideBar';
 
 function AdminFooter() {
   return (
@@ -23,7 +24,7 @@ function AdminFooter() {
                 <li><a href="#">Contact</a></li>
                 <li><a href="#">Terms & Conditions</a></li>
                 {/* Adding the admin signup link */}
-                <li><Link to="/admin/signup"><button>Sign Up as Admin</button></Link></li>
+                <li><Link to="/admin/login"><button>Log in  as Admin</button></Link></li>
               </ul>
             </div>
 
