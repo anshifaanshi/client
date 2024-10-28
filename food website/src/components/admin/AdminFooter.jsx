@@ -19,7 +19,7 @@ function Footer() {
             <li><a href="#">About Us</a></li>
             <li><a href="#">Contact</a></li>
             <li><a href="#">Terms & Conditions</a></li>
-
+            <Link to={'admin/login'}><button className='bg-gradient-to-r from-red-500 to-red-300 text-white font-bold py-2 px-4 rounded-lg shadow-md transition duration-300 ease-in-out transform hover:scale-105 hover:shadow-lg' >login as admin</button></Link>
           </ul>
         </div>
       

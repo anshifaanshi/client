@@ -5,6 +5,6 @@ import adminReducer from "../redux/features/adminSlice";
 export const store = configureStore({
     reducer: {
         user: userReducer,
-        mentor: adminReducer,
+        admin: adminReducer,
     },
 });

@@ -4,13 +4,13 @@ import { SideBar } from './SideBar';
 
 function AdminFooter() {
   return (
-    <div className='footer'>
-      <footer className="footer mt-auto py-3">
+    <div className=''>
+      <footer className="footer">
         <div className="container">
           <div className="row">
             <div className="col-md-4">
               <h5 className="footerhead">About</h5>
-              <p>
+              <p className='footerlist'>
                 Learn more about us and our mission to deliver quality food at
                 your convenience.
               </p>
@@ -24,7 +24,7 @@ function AdminFooter() {
                 <li><a href="#">Contact</a></li>
                 <li><a href="#">Terms & Conditions</a></li>
                 {/* Adding the admin signup link */}
-                <li><Link to="/admin/login"><button>Log in  as Admin</button></Link></li>
+                <li><Link to={"/admin/login"}><button>Log in  as Admin</button></Link></li>
               </ul>
             </div>
 

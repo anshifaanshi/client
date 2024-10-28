@@ -1,14 +1,14 @@
 import React from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Link } from 'react-router-dom';
-import { UserRound } from 'lucide-react';
-import { ShoppingCart } from 'lucide-react';
-function Header() {
+import {ShoppingCart,UserRound} from 'lucide-react'
+function UserHeader() {
   return (
     
     <div>
     <nav className="navbar navbar-expand-lg navbar-light">
       <a className="name navbar-brand fw-bold" href="#">MealMate</a>
+      
       <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span className="navbar-toggler-icon"></span>
       </button>
@@ -17,27 +17,17 @@ function Header() {
           <li className="nav-item">
             <Link className="nav-link" to="/">Home</Link>
           </li>
-          <li className="nav-item">
-            <Link className="nav-link" to="/about">About Us</Link>
-          </li>
-          <li className="nav-item">
-            <Link className="nav-link" to="/contact">Contact Us</Link>
-          </li>
+        
+          <li ><Link to='/Cart/getcart'><ShoppingCart /></Link></li>
+          <li ><Link to='/user/profile'><UserRound/></Link></li>
         </ul>
       </div>
     </nav>
-    <div>
-      <Link to={'user/profile'}>
-        <UserRound />
-        </Link>
-        <Link to='/getCart'>
-        <ShoppingCart />
-        </Link>
-    </div>
+   
   </div>
        
          
   )
 }
 
-export default Header
+export default UserHeader

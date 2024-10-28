@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom"; // Import useNavigate and useParams
 import { axiosinstance } from "../config/axiosinstance"; // Import axiosinstance
 import { toast } from 'react-toastify'; // Assuming you're using react-toastify for notifications
-
+import Header from "../components/Header";
 const Hoteldetails = () => {
     const [data, setData] = useState({});
     const [loading, setLoading] = useState(true);
@@ -54,27 +54,40 @@ const Hoteldetails = () => {
     }
 
     return (
-        <div>
-            <h2>Hotel Details</h2>
-            <div className="flex w-full">
-                <div className="w-8/12 my-10">
-                    <h1 className="text-3xl">{data?.title}</h1>
-                    <h1>{data?.description}</h1>
-                    <h1>{data?.price}</h1>
-                    <h1>{data?.duration}</h1>
+        <div className="container my-5">
+   
+   <imr src='https://zepto-1-ajzu.vercel.app/assets/menu_4-CpXAwO71.png'/>
 
-                    {/* Navigate to another profile page */}
-                    <button onClick={() => navigate('/fooditems/allfood')} className="btn btn-primary">
-                        Menu
-                    </button>
-                </div>
-                <div className="w-5/12">
-                    <p>{data?.email}</p>
-                    <p>{data?.isActive ? 'Active' : 'Inactive'}</p>
-                    <img src={data?.image} alt="Hotel" />
-                </div>
-            </div>
+        <div className="row">
+          <div className="col-md-8 my-3">
+            <h1 className="HOTELNAME display-4">{data?.name}</h1>
+            <div className="detailsdiv">
+            <p className="lead">{data?.cuisineType?.join(", ")}</p>
+            <p><strong>Address:</strong> {data?.address?.street}, {data?.address?.city}, {data?.address?.state}, {data?.address?.country}</p>
+            <p><strong>Phone:</strong> {data?.phone}</p>
+            <p><strong>Email:</strong> {data?.email}</p>
+            <p><strong>Rating:</strong> {data?.rating} / 5</p>
+            <p><strong>Opening Hours:</strong> {data?.openingHours?.open} - {data?.openingHours?.close}</p>
+            <p><strong>Website:</strong> <a href={data?.website} target="_blank" rel="noopener noreferrer">{data?.website}</a></p>
+            <button 
+              onClick={() => navigate('/fooditems/allfood')} 
+              className="btn btn-primary mt-3"
+            >
+              Menu
+            </button>
+            <button>reviews</button></div>
+          </div>
+          <div className="col-md-4 my-3 text-center">
+            <img 
+              src={data?.image} 
+              alt="Hotel" 
+              className="img-fluid rounded shadow" 
+              style={{ maxHeight: '300px', objectFit: 'cover' }} 
+            />
+            <p className="mt-2">{data?.isActive ? 'Status: Active' : 'Status: Inactive'}</p>
+          </div>
         </div>
+      </div>
     );
 };
 

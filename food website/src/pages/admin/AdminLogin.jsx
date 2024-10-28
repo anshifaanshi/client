@@ -1,58 +1,70 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import axios from 'axios'; // Ensure you have axios installed or replace with your preferred method for making API calls
+import React from "react";
+import { useForm } from "react-hook-form";
+import { Link, useNavigate } from "react-router-dom";
+import { axiosinstance } from "../../config/axiosinstance";
+import toast from "react-hot-toast";
 
-const AdminLogin = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
-  const navigate = useNavigate(); // Initialize useNavigate hook
+export const AdminLogin = () => {
+    const { register, handleSubmit } = useForm();
+    const navigate = useNavigate();
 
-  const handleLogin = async (event) => {
-    event.preventDefault();
+    const admin = {
+        role: "admin",
+        login_api: "/admin/login",
+        profile_route: "/admin/profile",
+      
+    };
 
-    try {
-      const response = await axios.post('/admin/login', { email, password });
+    
 
-      // Handle successful login
-      // Example: Redirect to admin dashboard or some other route
-      navigate('/admin/dashboard'); // Update this route based on your actual admin dashboard route
+    console.log(admin, "=====user");
 
-    } catch (err) {
-      // Handle login error
-      setError('Invalid email or password. Please try again.');
-    }
-  };
+    const onSubmit = async (data) => {
+        try {
+            const response = await axiosinstance({ method: "POST", url: admin.login_api, data });
+            console.log(response, "====response");
+            toast.success("Log-in success");
+            navigate('/admin/profile');
+        } catch (error) {
+            toast.error("Log-in failed");
+            console.log(error);
+        }
+    };
 
-  return (
-    <div className="login-container">
-      <h2>Admin Login</h2>
-      <form onSubmit={handleLogin} className="login-form">
-        <div className="form-group">
-          <label htmlFor="email">Email:</label>
-          <input
-            type="email"
-            id="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-          />
+    return (
+        <div className="hero bg-base-200 min-h-screen">
+            <div className="hero-content flex-col lg:flex-row-reverse">
+                <div className="text-center lg:text-left">
+                    <h1 className="text-5xl font-bold">Login now!  </h1>
+                   
+                </div>
+                <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl">
+                    <form className="card-body" onSubmit={handleSubmit(onSubmit)}>
+                        <div className="form-control">
+                            <label className="label">
+                                <span className="label-text">Email</span>
+                            </label>
+                            <input type="email" {...register("email")} placeholder="email" className="input input-bordered" required />
+                        </div>
+                        <div className="form-control">
+                            <label className="label">
+                                <span className="label-text">Password</span>
+                            </label>
+                            <input
+                                type="password"
+                                {...register("password")}
+                                placeholder="password"
+                                className="input input-bordered"
+                                required
+                            />
+                          
+                        </div>
+                        <div className="form-control mt-6">
+                            <button className="btn btn-primary">Login</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
         </div>
-        <div className="form-group">
-          <label htmlFor="password">Password:</label>
-          <input
-            type="password"
-            id="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          />
-        </div>
-        {error && <p className="error-message">{error}</p>}
-        <button type="submit">Login</button>
-      </form>
-    </div>
-  );
+    );
 };
-
-export default AdminLogin;

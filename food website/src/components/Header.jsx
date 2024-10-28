@@ -1,7 +1,7 @@
 import React from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Link } from 'react-router-dom';
-import Darkmode from './ui/Darkmode';
+
 function Header() {
   return (
     
@@ -28,7 +28,7 @@ function Header() {
         </ul>
       </div>
     </nav>
-    <Darkmode />
+    
   </div>
        
          

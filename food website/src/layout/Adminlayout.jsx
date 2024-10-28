@@ -1,44 +1,48 @@
-import React, { useEffect, useState } from "react";
-import { Outlet, useLocation } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+
+    
+import React, { useEffect } from 'react';
+import Header from '../components/Header';
+import AdminFooter from '../pages/admin/AdminFooter';
+import { Outlet, useLocation } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 import { axiosinstance } from "../config/axiosinstance";
-import AdminHeader  from "../components/admin/AdminHeader";
-import AdminFooter  from "../components/admin/AdminFooter";
-
-
+import { saveadmin, clearadmin } from '../redux/features/adminSlice';
+import AdminHeader from '../components/admin/AdminHeader'
 
 export const Adminlayout = () => {
-    const { isMentorExist } = useSelector((state) => state.mentor);
-    const dispatch = useDispatch();
-    const location = useLocation();
+  const { isAdminExist } = useSelector((state) => state.admin);
+  const dispatch = useDispatch();
+  const location = useLocation();
 
-    const checkMentor = async () => {
-        try {
-            const response = await axiosinstance({
-                method: "GET",
-                url: "/mentor/check-mentor",
-            });
-            dispatch(saveMentor());
-            console.log(response);
-        } catch (error) {
-            dispatch(clearMentor());
-            console.log(error);
-        }
-    };
+  const checkUser = async () => {
+    try {
+      const response = await axiosinstance({
+        method: "GET",
+        url: "/admin/check-admin",
+      });
+      console.log("full response:",response)
+      // Assuming the user data is in response.data.user
+      if (response?.data?.data) {
+        dispatch(saveadmin(response.data.data));
+      }
+      console.log("User data: ", response.data.data);
+    } catch (error) {
+      dispatch(clearadmin());
+      console.log("Error checking user: ", error);
+    }
+  };
 
-    useEffect(() => {
-        checkMentor();
-    }, [location.pathname]);
+  useEffect(() => {
+    checkUser();
+  }, [location.pathname]); // Optional: Remove this dependency if you want to check only once
 
-    return (
-        <div>
-            <AdminHeader />
-            <div className="min-h-96 flex h-full">
-                {isMentorExist && <SideBar />}
-                <Outlet />
-            </div>
-            {/* <Footer /> */}
-            <AdminFooter />
-        </div>
-    );
+  return (
+    <div>
+      {isAdminExist ? <AdminHeader /> : <Header />}
+      <div className="min-h-96">
+        <Outlet />
+      </div>
+      <AdminFooter />
+    </div>
+  );
 };

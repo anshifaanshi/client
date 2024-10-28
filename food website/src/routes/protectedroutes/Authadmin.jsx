@@ -10,7 +10,7 @@ function Authadmin({ children }) {
         try {
             const response = await axiosinstance({
                 method: "GET",
-                url: "/admin/checkadmin",
+                url: "/admin/check-admin",
             });
             if (response.status === 200) {
                 setIsAdmin(true); // Correct state setter

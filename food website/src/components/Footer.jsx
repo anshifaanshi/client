@@ -3,27 +3,28 @@ import {Link} from 'react-router-dom'
 
 function Footer() {
   return (
-    <div className='footer'><footer class="footer mt-auto py-3">
-    <div class="container">
-      <div class="row">
+    <div className='footer'><footer className="footer mt-auto py-3">
+    <div className="container">
+      <div className="row">
  
-        <div class="col-md-4">
+        <div className="col-md-4">
           <h5 className='footerhead'>About</h5>
-          <p>Learn more about us and our mission to deliver quality food at your convenience.</p>
+          <p className='footerlist list-unstyled'>Learn more about us and our mission to deliver quality food at your convenience.</p>
         </div>
      
-        <div class="col-md-4">
+        <div className="col-md-4">
           <h5 className='footerhead'>Quick Links</h5>
+          
           <ul className="footerlist list-unstyled">
             <li><a href="#">Home</a></li>
             <li><a href="#">About Us</a></li>
             <li><a href="#">Contact</a></li>
             <li><a href="#">Terms & Conditions</a></li>
-<button>sign up as admin</button>
+
           </ul>
         </div>
       
-        <div class="col-md-4">
+        <div className="col-md-4">
           <h5 className='footerhead'>Contact Us</h5>
           <ul className=" footerlist list-unstyled">
             <li><a href="#">Email: info@mealmate.com</a></li>

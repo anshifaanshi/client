@@ -1,23 +1,23 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-    isadminExist: false,
-    mentor: {},
+  isAdminExist: false, // Corrected casing to match your component
+  adminData: {}, // Store admin data here
 };
 
 export const adminSlice = createSlice({
-    name: "mentor",
-    initialState,
-    reducers: {
-        saveadmin: (state, action) => {
-            state.isadminExist = true;
-            state.mentor = action.payload;
-        },
-        clearadmin: (state) => {
-            state.isadminExist = false;
-            state.admin = {};
-        },
+  name: "admin",
+  initialState,
+  reducers: {
+    saveadmin: (state, action) => {
+      state.isAdminExist = true; // Use consistent naming
+      state.adminData = action.payload; // Store admin data in adminData
     },
+    clearadmin: (state) => {
+      state.isAdminExist = false;
+      state.adminData = {}; // Clear the adminData property
+    },
+  },
 });
 
 // Action creators are generated for each case reducer function

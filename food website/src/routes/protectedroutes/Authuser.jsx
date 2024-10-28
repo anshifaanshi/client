@@ -1,22 +1,31 @@
-// AuthUser.jsx
-import React, { useEffect } from 'react';
-import { Outlet, useNavigate } from 'react-router-dom';
-import { useSelector } from 'react-redux';
 
-const AuthUser = () => {
-  const { isUserExist } = useSelector((state) => state.user);
-  const navigate = useNavigate();
+import React, { useEffect, useState } from 'react';
+import { axiosinstance } from '../../config/axiosinstance';
+import { useNavigate } from 'react-router-dom';
 
-  // Use useEffect to handle side-effect navigation
+export const AuthUser = ({ children }) => {
+  const [isUser, setIsUser] = useState(false);
+const navigate=useNavigate()
+
+
+  const checkUser = async () => {
+      try {
+          const response = await axiosinstance({
+              method: "GET",
+              url: "/user/checkuser",
+          });
+          if (response.status === 200) {
+              setIsUser(true); 
+          }
+      } catch (error) {
+          setIsUser(false); 
+          console.log(error);
+          navigate('/'); 
+      }
+  };
   useEffect(() => {
-    if (!isUserExist) {
-      navigate('/login'); // Navigate after component renders
-    }
-  }, [isUserExist, navigate]);
-  console.log(isUserExist)
+    checkUser();
+  }, []);
 
-  // Render the outlet only if user exists
-  return isUserExist ? <Outlet /> : null;
+  return isUser ? children : null;
 };
-
-export default AuthUser;

@@ -1,25 +1,34 @@
 import Aboutus from '../pages/Aboutus';
-import { createBrowserRouter } from 'react-router-dom';
+import { createBrowserRouter, Outlet } from 'react-router-dom';
 import Rootlayout from '../layout/Rootlayout';
 import Home from '../pages/Home';
 import { LoginPage } from '../pages/Login';
-import Signup from '../pages/Signup';
+import { Signup } from '../pages/Signup';
 import { Hotel } from '../pages/Hotels';
 import Hoteldetails from '../pages/Hoteldetails';
 import Fooditems from '../pages/Fooditems';
-import AdminLogin from '../pages/admin/AdminLogin';
-import Authuser from '../routes/protectedroutes/Authuser';
+import { AdminLogin } from '../pages/admin/AdminLogin';
+import { AuthUser } from '../routes/protectedroutes/Authuser';
 import Profile from '../pages/user/Profile';
 import { CartPage } from '../pages/user/Cartpage';
-import { ProfilePage } from '../pages/Userprofile';
+import ProfilePage from '../pages/ProfilePage';
 import { Adminlayout } from '../layout/Adminlayout';
 import AdminProfile from '../pages/admin/AdminProfile';
 import { UserLayout } from '../layout/Userlayout';
+import About from '../pages/About';
+import Authadmin from '../routes/protectedroutes/Authadmin';
+import UserEditPage from '../pages/user/UserEditPage';
+import ErrorPage from '../pages/ErrorPage';
+import { CreateHotels } from '../components/admin/CreateHotels';
+import OrderHistory from '../pages/Order';
+import PaymentSuccessPage from '../payment/PaymentSuccessPage'
+import PaymentCancelPage from '../payment/PaymentCancelPage';
 
 export const router = createBrowserRouter([
   {
     path: "/",
     element: <UserLayout />,
+
     children: [
       {
         path: "/",
@@ -27,7 +36,7 @@ export const router = createBrowserRouter([
       },
       {
         path: "about",
-        element: <Aboutus />,
+        element: <About />,
       },
       {
         path: "login",
@@ -50,36 +59,71 @@ export const router = createBrowserRouter([
         element: <Fooditems />,
       },
       {
-        path: "Cart/getcart",
-        element: <CartPage />,
+        path: "/user/payment/success",
+        element: <PaymentSuccessPage />,
       },
-     
-  ,
-  {
-    path: "user",
-    element: <Authuser />, // Protect user routes
-    children: [
       {
-        path: "profile",
-        element: <profilePage />, // Display the user's profile
+        path: "/user/payment/cancel",
+        element: <PaymentCancelPage />,
       },
-    ],
-  }
-      
+      {
+        path: "user",
+        element: (
+          <AuthUser>
+            <Outlet/>
+          </AuthUser>
+        ),
+        children: [
+          {
+            path: "profile",
+            element: <ProfilePage />,  
+          },
+          {
+            path: 'edit',
+            element: <UserEditPage />
+          },
+          {
+            path: 'history',
+            element: <OrderHistory />
+          }
+        ],
+      },
     ],
   },
   {
+    path: '/admin/login',
+    element: <AdminLogin />
+  },
+  {
     path: "admin",
-    element: <Adminlayout />,
+    element: (
+      <Authadmin>
+        <Adminlayout />
+      </Authadmin>
+    ),
     children: [
-      {
-        path: "login",
-        element: <AdminLogin role="admin" />,
-      },
       {
         path: "profile",
         element: <AdminProfile />,
       },
+      {
+        path: 'createhotel',
+        element: <CreateHotels />,
+      },
     ],
   },
+  {
+    path: 'Cart',
+    element: (
+      <AuthUser>
+        <UserLayout />
+      </AuthUser>
+    ),
+    children: [
+      {
+        path: 'getcart',
+        element: <CartPage />
+      }
+    ]
+  }
 ]);
