@@ -24,13 +24,9 @@ function Fooditems() {
         }
     };
 
-    const addToCart = async (foodItemId, quantity) => {
-        console.log('Adding to cart, Food Item ID:', foodItemId, 'Quantity:', quantity); 
+    const addToCart = async (foodItemId) => {
         try {
-            const response = await axiosinstance.post('/cart/add-to-cart', {
-                foodItemId,
-                quantity,
-            });
+            const response = await axiosinstance.post('/cart/add-to-cart', { foodItemId });
             console.log('Response after adding to cart:', response.data); 
             toast.success('Food item added to cart!');
         } catch (error) {
@@ -38,6 +34,8 @@ function Fooditems() {
             toast.error(error.response?.data?.message || 'Please login');
         }
     };
+    
+    
 
     useEffect(() => {
         fetchFoodItems();
